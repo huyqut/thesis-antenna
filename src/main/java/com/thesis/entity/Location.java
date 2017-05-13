@@ -4,9 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-
-
-@Document(collection = "location_collection")
+@Document(collection = "location-collection")
 public class Location {
     @Id
     @JsonProperty("_id")
@@ -15,7 +13,7 @@ public class Location {
     @JsonProperty("place")
     private String place;
 
-    @JsonProperty("place")
+    @JsonProperty("count")
     private Integer count;
 
     public String get_Id() {
