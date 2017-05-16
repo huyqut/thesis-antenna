@@ -25,5 +25,6 @@ repositories {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-mongodb')
 	compile('org.springframework.boot:spring-boot-starter-web')
+	compile 'com.google.maps:google-maps-services:+'
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }

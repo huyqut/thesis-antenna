@@ -2,7 +2,6 @@ package com.thesis.repository;
 
 import com.thesis.entity.Location;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.repository.Repository;
 
 import java.util.List;
 
@@ -15,4 +14,5 @@ public interface LocationRepository extends MongoRepository<Location, String> {
 
     List<Location> findAll();
 
+    List<Location> findFirst10OrderByCount();
 }

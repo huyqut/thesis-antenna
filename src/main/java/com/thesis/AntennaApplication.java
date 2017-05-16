@@ -12,7 +12,7 @@ import org.springframework.context.annotation.Configuration;
 @ComponentScan
 public class AntennaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AntennaApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(AntennaApplication.class, args);
+    }
 }
