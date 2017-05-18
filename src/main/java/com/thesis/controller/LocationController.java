@@ -4,14 +4,13 @@ import com.google.maps.GeoApiContext;
 import com.google.maps.GeocodingApi;
 import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.thesis.entity.Location;
 import com.thesis.repository.LocationRepository;
-import com.thesis.responseDTO.LocationObject;
+import com.thesis.response.LocationObject;
+import com.thesis.response.Response;
+import com.thesis.response.Success;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,7 +34,8 @@ public class LocationController {
 
     @RequestMapping(method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<LocationObject> getTopLocations(@RequestParam int size) throws InterruptedException, ApiException, IOException {
+    public Response<List<LocationObject>> getTopLocations(@RequestParam int size)
+        throws InterruptedException, ApiException, IOException {
         List<LocationObject> locationObjectList = new ArrayList<>();
         List<Location> locationList = locationRepository.findTop10ByOrderByCountDesc();
         for(Location location : locationList) {
@@ -47,6 +47,6 @@ public class LocationController {
             System.out.println(results[0].formattedAddress);
             locationObjectList.add(locationObject);
         }
-        return locationObjectList;
+        return Success.TOP_10_LOCATION_FOUND.with(locationObjectList);
     }
 }

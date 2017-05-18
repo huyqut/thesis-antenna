@@ -1,4 +1,4 @@
-package com.thesis.responseDTO;
+package com.thesis.response;
 
 import com.google.maps.model.Geometry;
 
