@@ -1,11 +1,8 @@
-package com.thesis;
+package com.thesis.response;
 
 import com.thesis.common.ErrorCode;
 import com.thesis.common.SuccessCode;
 import org.springframework.http.HttpStatus;
-import org.w3c.dom.html.HTMLParagraphElement;
-
-import javax.validation.constraints.Null;
 
 /**
  * <h1>Abstract Response Data Transfer Object</h1>

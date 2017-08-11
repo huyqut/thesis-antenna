@@ -1,17 +1,17 @@
-package com.thesis.response;
+package com.thesis.dto;
 
 import com.google.maps.model.Geometry;
 
 /**
  * Created by lap08 on 5/16/2017.
  */
-public class LocationObject {
+public class LocationDTO {
 
     private String place;
     private Integer count;
     private Geometry geometry;
 
-    public LocationObject(String place, Integer count, Geometry geometry) {
+    public LocationDTO(String place, Integer count, Geometry geometry) {
         this.place = place;
         this.count = count;
         this.geometry = geometry;
@@ -21,7 +21,7 @@ public class LocationObject {
         return place;
     }
 
-    public LocationObject setPlace(String place) {
+    public LocationDTO setPlace(String place) {
         this.place = place;
         return this;
     }
@@ -30,7 +30,7 @@ public class LocationObject {
         return count;
     }
 
-    public LocationObject setCount(Integer count) {
+    public LocationDTO setCount(Integer count) {
         this.count = count;
         return this;
     }
@@ -39,7 +39,7 @@ public class LocationObject {
         return geometry;
     }
 
-    public LocationObject setGeometry(Geometry geometry) {
+    public LocationDTO setGeometry(Geometry geometry) {
         this.geometry = geometry;
         return this;
     }

@@ -6,7 +6,7 @@ import com.google.maps.errors.ApiException;
 import com.google.maps.model.GeocodingResult;
 import com.thesis.entity.Location;
 import com.thesis.repository.LocationRepository;
-import com.thesis.response.LocationObject;
+import com.thesis.dto.LocationDTO;
 import com.thesis.response.Response;
 import com.thesis.response.Success;
 
@@ -34,19 +34,19 @@ public class LocationController {
 
     @RequestMapping(method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response<List<LocationObject>> getTopLocations(@RequestParam int size)
+    public Response<List<LocationDTO>> getTopLocations(@RequestParam int size)
         throws InterruptedException, ApiException, IOException {
-        List<LocationObject> locationObjectList = new ArrayList<>();
+        List<LocationDTO> locationDTOList = new ArrayList<>();
         List<Location> locationList = locationRepository.findTop10ByOrderByCountDesc();
         for(Location location : locationList) {
             GeocodingResult[] results =  GeocodingApi.geocode(context,
                                                               location.getPlace()).await();
-            LocationObject locationObject = new LocationObject(location.getPlace(),
+            LocationDTO locationDTO = new LocationDTO(location.getPlace(),
                                                                location.getCount(),
                                                                results[0].geometry);
             System.out.println(results[0].formattedAddress);
-            locationObjectList.add(locationObject);
+            locationDTOList.add(locationDTO);
         }
-        return Success.TOP_10_LOCATION_FOUND.with(locationObjectList);
+        return Success.TOP_10_LOCATION_FOUND.with(locationDTOList);
     }
 }
