@@ -35,6 +35,7 @@ public class GraphServiceImpl implements GraphService {
         List<GraphDTO.NodeGraph> nodeGraphs = new ArrayList<>();
         List<GraphDTO.LinkGraph> linkGraphs = new ArrayList<>();
         GraphDTO graphDTO = new GraphDTO(nodeGraphs, linkGraphs);
+        Set<String> allPersonSet = new HashSet<>();
         for(News news : newsList){
             GraphDTO.NodeGraph nodeGraph = graphDTO.new NodeGraph(news.getTitle(), 0, Constant.GraphNodeType.TYPE_ARTICLE);
             nodeGraphs.add(nodeGraph);
@@ -51,12 +52,15 @@ public class GraphServiceImpl implements GraphService {
                 }
             }
             for(String people : personList.keySet()) {
-                nodeGraph = graphDTO.new NodeGraph(people, 0, Constant.GraphNodeType.TYPE_PERSON);
-                nodeGraphs.add(nodeGraph);
+                if(!allPersonSet.contains(people)) {
+                    nodeGraph = graphDTO.new NodeGraph(people, 0, Constant.GraphNodeType.TYPE_PERSON);
+                    nodeGraphs.add(nodeGraph);
+                    allPersonSet.add(people);
+                }
                 GraphDTO.LinkGraph linkGraph = graphDTO.new LinkGraph(people, news.getTitle(), personList.get(people)*3/2);
                 linkGraphs.add(linkGraph);
             }
         }
-        return new GraphDTO(nodeGraphs, linkGraphs);
+        return graphDTO;
     }
 }
