@@ -29,8 +29,9 @@ public class LocationController {
     @Autowired
     private LocationRepository locationRepository;
 
-    private static GeoApiContext context = new GeoApiContext()
-        .setApiKey("AIzaSyCsy02RVCZOrSgEDC-R5daQ1vz5A3lpIL4");
+    private static GeoApiContext context = new GeoApiContext.Builder()
+        .apiKey("AIzaSyCsy02RVCZOrSgEDC-R5daQ1vz5A3lpIL4")
+        .build();
 
     @RequestMapping(method = RequestMethod.GET,
                     produces = MediaType.APPLICATION_JSON_VALUE)
