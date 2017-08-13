@@ -6,7 +6,7 @@ package com.thesis.common;
 public class Constant {
 
     public static class GraphNodeType {
-        public static String TYPE_PERSON = "PERSON";
-        public static String TYPE_ARTICLE = "ARTICLE";
+        public static int TYPE_PERSON = 0;
+        public static int TYPE_ARTICLE = 1;
     }
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -27,11 +28,19 @@ public class ForceGraphController {
     @Autowired
     GraphService graphService;
 
+//    @RequestMapping(method = RequestMethod.GET,
+//            produces = MediaType.APPLICATION_JSON_VALUE)
+//    public Response<GraphDTO> getGraphDataInTime()
+//            throws InterruptedException, ApiException, IOException {
+//        GraphDTO graphDTO = graphService.getDataGraph();
+//        return Success.GET_DATA_GRAPH.with(graphDTO);
+//    }
+
     @RequestMapping(method = RequestMethod.GET,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public Response<GraphDTO> getGraphData()
+    public Response<GraphDTO> getGraphDataLimitedNumber(@RequestParam int nodes)
             throws InterruptedException, ApiException, IOException {
-        GraphDTO graphDTO = graphService.getDataGraph();
+        GraphDTO graphDTO = graphService.getDataGraph(nodes);
         return Success.GET_DATA_GRAPH.with(graphDTO);
     }
 }
