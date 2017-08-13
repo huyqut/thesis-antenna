@@ -8,5 +8,5 @@ import com.thesis.dto.GraphDTO;
 
 public interface GraphService {
 
-    GraphDTO getDataGraph();
+    GraphDTO getDataGraph(int node);
 }

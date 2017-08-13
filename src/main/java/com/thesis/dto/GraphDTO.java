@@ -9,10 +9,21 @@ public class GraphDTO {
 
     List<NodeGraph> nodes;
     List<LinkGraph> links;
+    List<TypeNodeGraph> types;
 
-    public GraphDTO(List<NodeGraph> nodes, List<LinkGraph> links) {
+    public GraphDTO(List<NodeGraph> nodes, List<LinkGraph> links, List<TypeNodeGraph> types) {
         this.nodes = nodes;
         this.links = links;
+        this.types = types;
+    }
+
+    public List<TypeNodeGraph> getTypes() {
+        return types;
+    }
+
+    public GraphDTO setTypes(List<TypeNodeGraph> types) {
+        this.types = types;
+        return this;
     }
 
     public List<NodeGraph> getNodes() {
@@ -34,69 +45,97 @@ public class GraphDTO {
     }
 
     public class NodeGraph {
-        String id;
-        int group;
-        String type;
+        int id;
+        int type;
+        String name;
 
-        public NodeGraph(String id, int group, String type) {
+        public NodeGraph(int id, int type, String name) {
             this.id = id;
-            this.group = group;
             this.type = type;
+            this.name = name;
         }
 
-        public String getId() {
+        public int getId() {
             return id;
         }
 
-        public NodeGraph setId(String id) {
+        public NodeGraph setId(int id) {
             this.id = id;
             return this;
         }
 
-        public int getGroup() {
-            return group;
+        public String getName() {
+            return name;
         }
 
-        public NodeGraph setGroup(int group) {
-            this.group = group;
+        public NodeGraph setName(String name) {
+            this.name = name;
             return this;
         }
 
-        public String getType() {
+        public int getType() {
             return type;
         }
 
-        public NodeGraph setType(String type) {
+        public NodeGraph setType(int type) {
             this.type = type;
             return this;
         }
     }
 
+    public class TypeNodeGraph {
+        String name;
+        int id;
+
+        public TypeNodeGraph(String name, int id) {
+            this.name = name;
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public TypeNodeGraph setName(String name) {
+            this.name = name;
+            return this;
+        }
+
+        public int getId() {
+            return id;
+        }
+
+        public TypeNodeGraph setId(int id) {
+            this.id = id;
+            return this;
+        }
+    }
+
     public class LinkGraph {
-        String source;
-        String target;
+        int source;
+        int target;
         int value;
 
-        public LinkGraph(String source, String target, int value) {
+        public LinkGraph(int source, int target, int value) {
             this.source = source;
             this.target = target;
             this.value = value;
         }
 
-        public String getSource() {
+        public int getSource() {
             return source;
         }
 
-        public LinkGraph setSource(String source) {
+        public LinkGraph setSource(int source) {
             this.source = source;
             return this;
         }
 
-        public String getTarget() {
+        public int getTarget() {
             return target;
         }
 
-        public LinkGraph setTarget(String target) {
+        public LinkGraph setTarget(int target) {
             this.target = target;
             return this;
         }

@@ -24,21 +24,36 @@ public class GraphServiceImpl implements GraphService {
     NewsRepository newsRepository;
 
     @Override
-    public GraphDTO getDataGraph() {
+    public GraphDTO getDataGraph(int nodes) {
 
         long date = System.currentTimeMillis();
         int offset = TimeZone.getTimeZone("GMT-7").getOffset(date);
-        // Get current time - 24h
-        long currentSeconds = (date + offset)/1000 - 24*3600;
-
+        // Get current time - 12h
+        long currentSeconds = (date + offset)/1000 - 12*3600;
+        int id = 0;
         List<News> newsList = newsRepository.findCurrentNewsIn24H(currentSeconds);
         List<GraphDTO.NodeGraph> nodeGraphs = new ArrayList<>();
         List<GraphDTO.LinkGraph> linkGraphs = new ArrayList<>();
-        GraphDTO graphDTO = new GraphDTO(nodeGraphs, linkGraphs);
-        Set<String> allPersonSet = new HashSet<>();
+        List<GraphDTO.TypeNodeGraph> typeNodeGraphs = new ArrayList<>();
+        GraphDTO graphDTO = new GraphDTO(nodeGraphs, linkGraphs, typeNodeGraphs);
+        typeNodeGraphs.add(graphDTO.new TypeNodeGraph("PERSON", Constant.GraphNodeType.TYPE_PERSON));
+        typeNodeGraphs.add(graphDTO.new TypeNodeGraph("ARTICLE", Constant.GraphNodeType.TYPE_ARTICLE));
+
+        Map<String, Integer> allPersonSet = new TreeMap<>();
         for(News news : newsList){
-            GraphDTO.NodeGraph nodeGraph = graphDTO.new NodeGraph(news.getTitle(), 0, Constant.GraphNodeType.TYPE_ARTICLE);
-            nodeGraphs.add(nodeGraph);
+
+            if(news.getTitle() == null) {
+                continue;
+            }
+
+            // Check number of nodes
+            if (nodeGraphs.size() >= nodes) {
+                break;
+            }
+
+            GraphDTO.NodeGraph nodeArticleGraph = graphDTO.new NodeGraph(id,Constant.GraphNodeType.TYPE_ARTICLE, news.getTitle());
+            nodeGraphs.add(nodeArticleGraph);
+            ++id;
             if(news.getPeopleList() == null) {
                 continue;
             }
@@ -52,12 +67,13 @@ public class GraphServiceImpl implements GraphService {
                 }
             }
             for(String people : personList.keySet()) {
-                if(!allPersonSet.contains(people)) {
-                    nodeGraph = graphDTO.new NodeGraph(people, 0, Constant.GraphNodeType.TYPE_PERSON);
-                    nodeGraphs.add(nodeGraph);
-                    allPersonSet.add(people);
+                if(!allPersonSet.containsKey(people)) {
+                    GraphDTO.NodeGraph nodePersonGraph = graphDTO.new NodeGraph(id, Constant.GraphNodeType.TYPE_PERSON, people);
+                    nodeGraphs.add(nodePersonGraph);
+                    allPersonSet.put(people, id);
+                    ++id;
                 }
-                GraphDTO.LinkGraph linkGraph = graphDTO.new LinkGraph(people, news.getTitle(), personList.get(people)*3/2);
+                GraphDTO.LinkGraph linkGraph = graphDTO.new LinkGraph(allPersonSet.get(people), nodeArticleGraph.getId(), personList.get(people)*3/2);
                 linkGraphs.add(linkGraph);
             }
         }
