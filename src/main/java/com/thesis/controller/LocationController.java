@@ -38,7 +38,7 @@ public class LocationController {
     public Response<List<LocationDTO>> getTopLocations(@RequestParam int size)
         throws InterruptedException, ApiException, IOException {
         List<LocationDTO> locationDTOList = new ArrayList<>();
-        List<Location> locationList = locationRepository.findTop10ByOrderByCountDesc();
+        List<Location> locationList = locationRepository.findTop50ByOrderByCountDesc();
         for(Location location : locationList) {
             GeocodingResult[] results =  GeocodingApi.geocode(context,
                                                               location.getPlace()).await();

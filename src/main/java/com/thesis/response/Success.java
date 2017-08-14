@@ -5,7 +5,8 @@ package com.thesis.response;
  */
 public enum Success {
     TOP_10_LOCATION_FOUND(1, "Top 10 locations are found"),
-    GET_DATA_GRAPH(1, "Get data graph success");
+    GET_DATA_GRAPH(1, "Get data graph success"),
+    LOAD_WEB(2, "Web is fully loaded");
 
     private int status;
     private String message;
