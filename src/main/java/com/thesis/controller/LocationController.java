@@ -31,5 +31,6 @@ public class LocationController {
     public Response<List<LocationDTO>> getTopLocations(@RequestParam int size) throws InterruptedException, ApiException, IOException {
         List<LocationDTO> locationDTOList = locationService.getTopLocation(size);
         return Success.TOP_LOCATION_FOUND.with(locationDTOList);
+
     }
 }

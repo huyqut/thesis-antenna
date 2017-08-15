@@ -16,5 +16,5 @@ public interface LocationRepository extends MongoRepository<Location, String> {
 
     List<Location> findAll();
 
-    List<Location> findTop10ByOrderByCountDesc();
+    List<Location> findTop50ByOrderByCountDesc();
 }
