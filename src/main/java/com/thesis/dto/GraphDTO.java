@@ -48,11 +48,28 @@ public class GraphDTO {
         int id;
         int type;
         String name;
+        String reference;
+
+        public NodeGraph(int id, int type, String name, String reference) {
+            this.id = id;
+            this.type = type;
+            this.name = name;
+            this.reference = reference;
+        }
 
         public NodeGraph(int id, int type, String name) {
             this.id = id;
             this.type = type;
             this.name = name;
+        }
+
+        public String getReference() {
+            return reference;
+        }
+
+        public NodeGraph setReference(String reference) {
+            this.reference = reference;
+            return this;
         }
 
         public int getId() {

@@ -38,7 +38,7 @@ public class GraphServiceImpl implements GraphService {
         long date = System.currentTimeMillis();
         int offset = TimeZone.getTimeZone("GMT-7").getOffset(date);
         // Get current time - 12h
-        long currentSeconds = (date + offset)/1000 - 12*3600;
+        long currentSeconds = (date + offset)/1000 - Constant.IN_TIME_HOUR*3600;
         int id = 0;
 
         List<News> newsList = newsRepository.findCurrentNewsInTime(currentSeconds);
@@ -61,7 +61,7 @@ public class GraphServiceImpl implements GraphService {
                 break;
             }
 
-            GraphDTO.NodeGraph nodeArticleGraph = graphDTO.new NodeGraph(id,Constant.GraphNodeType.TYPE_ARTICLE, news.getTitle());
+            GraphDTO.NodeGraph nodeArticleGraph = graphDTO.new NodeGraph(id,Constant.GraphNodeType.TYPE_ARTICLE, news.getTitle(), news.getReference());
             nodeGraphs.add(nodeArticleGraph);
             ++id;
             if(news.getPeopleList() == null) {
