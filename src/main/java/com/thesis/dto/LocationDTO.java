@@ -12,21 +12,21 @@ public class LocationDTO {
     private String place;
     private Integer count;
     private Geometry geometry;
-    private List<NewsDTO> newsDTOList;
+    private List<NewsDTO> relatedNews;
 
     public LocationDTO(String place, Integer count, Geometry geometry, List<NewsDTO> newsDTOList) {
         this.place = place;
         this.count = count;
         this.geometry = geometry;
-        this.newsDTOList = newsDTOList;
+        this.relatedNews = newsDTOList;
     }
 
-    public List<NewsDTO> getNewsDTOList() {
-        return newsDTOList;
+    public List<NewsDTO> getRelatedNews() {
+        return relatedNews;
     }
 
-    public LocationDTO setNewsDTOList(List<NewsDTO> newsDTOList) {
-        this.newsDTOList = newsDTOList;
+    public LocationDTO setRelatedNews(List<NewsDTO> newsDTOList) {
+        this.relatedNews = newsDTOList;
         return this;
     }
 
