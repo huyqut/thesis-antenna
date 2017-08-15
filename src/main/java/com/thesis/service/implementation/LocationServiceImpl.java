@@ -23,8 +23,9 @@ import java.util.*;
 @Service
 public class LocationServiceImpl implements LocationService {
 
-    private static GeoApiContext context = new GeoApiContext()
-            .setApiKey("AIzaSyCsy02RVCZOrSgEDC-R5daQ1vz5A3lpIL4");
+    private static GeoApiContext context = new GeoApiContext.Builder()
+            .apiKey("AIzaSyCsy02RVCZOrSgEDC-R5daQ1vz5A3lpIL4").build();
+
     @Autowired
     NewsRepository newsRepository;
 
