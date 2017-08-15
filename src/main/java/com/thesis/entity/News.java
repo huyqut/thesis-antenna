@@ -5,7 +5,6 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -31,12 +30,25 @@ public class News {
     @Field("people")
     private List<String> peopleList;
 
+    @JsonProperty("places")
+    @Field("places")
+    private List<String> placeList;
+
     public String get_id() {
         return _id;
     }
 
     public News set_id(String _id) {
         this._id = _id;
+        return this;
+    }
+
+    public List<String> getPlaceList() {
+        return placeList;
+    }
+
+    public News setPlaceList(List<String> placeList) {
+        this.placeList = placeList;
         return this;
     }
 

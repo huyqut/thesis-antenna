@@ -14,5 +14,5 @@ public interface NewsRepository extends MongoRepository<News, String> {
     void delete(News deleted);
     List<News> findAll();
     @Query(value = "{'created_at': {$gt: ?0}}")
-    List<News> findCurrentNewsIn24H(long time);
+    List<News> findCurrentNewsInTime(long time);
 }

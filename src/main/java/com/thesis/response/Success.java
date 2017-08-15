@@ -4,7 +4,7 @@ package com.thesis.response;
  * Created by huyqut on 5/18/17.
  */
 public enum Success {
-    TOP_10_LOCATION_FOUND(1, "Top 10 locations are found"),
+    TOP_LOCATION_FOUND(1, "Top locations are found"),
     GET_DATA_GRAPH(1, "Get data graph success");
 
     private int status;
