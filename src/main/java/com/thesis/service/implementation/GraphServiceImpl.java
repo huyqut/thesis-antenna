@@ -50,6 +50,7 @@ public class GraphServiceImpl implements GraphService {
         typeNodeGraphs.add(graphDTO.new TypeNodeGraph("ARTICLE", Constant.GraphNodeType.TYPE_ARTICLE));
 
         Map<String, Integer> allPersonSet = new TreeMap<>();
+        Set<String> titles = new HashSet<>();
         for(News news : newsList){
 
             if(news.getTitle() == null) {
@@ -61,10 +62,15 @@ public class GraphServiceImpl implements GraphService {
                 break;
             }
 
+            if(titles.contains(news.getTitle())) {
+                continue;
+            }
+            titles.add(news.getTitle());
+
             GraphDTO.NodeGraph nodeArticleGraph = graphDTO.new NodeGraph(id,Constant.GraphNodeType.TYPE_ARTICLE, news.getTitle(), news.getReference());
             nodeGraphs.add(nodeArticleGraph);
             ++id;
-            if(news.getPeopleList() == null) {
+            if(news.getPeopleList() == null || news.getPeopleList().isEmpty()) {
                 continue;
             }
             Map<String, Integer> personList = new HashMap<>();

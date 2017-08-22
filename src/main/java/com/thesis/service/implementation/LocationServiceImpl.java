@@ -41,10 +41,17 @@ public class LocationServiceImpl implements LocationService {
         List<News> newsList = newsRepository.findCurrentNewsInTime(currentSeconds);
         Map<String, Integer> topLocation = new HashMap<>();
         Map<String, List<NewsDTO>> topLinks = new HashMap<>();
+        Set<String> titles = new HashSet<>();
         for (News news : newsList) {
             if(news.getPlaceList() == null || news.getPlaceList().isEmpty()) {
                 continue;
             }
+
+            if(titles.contains(news.getTitle())) {
+                continue;
+            }
+            titles.add(news.getTitle());
+
             boolean checkedNews = true;
             for (String place : news.getPlaceList()) {
                 if (topLocation.containsKey(place)) {
